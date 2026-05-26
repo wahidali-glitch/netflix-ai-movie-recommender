@@ -25,9 +25,9 @@
 
 [![🚀 Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Click%20Here-E50914?style=for-the-badge)](https://netflix-ai-movie-recommender-zwnhjvhqog678y7bjpphbe.streamlit.app)
 &nbsp;
-[![⭐ Star this Repo](https://img.shields.io/github/stars/yourusername/netflix-ai-movie-recommender?style=for-the-badge&color=FFD700)](https://github.com/yourusername/netflix-ai-movie-recommender)
+[![⭐ Star this Repo](https://img.shields.io/github/stars/wahidali-glitch/netflix-ai-movie-recommender?style=for-the-badge&color=FFD700)](https://github.com/wahidali-glitch/netflix-ai-movie-recommender)
 &nbsp;
-[![🍴 Fork](https://img.shields.io/github/forks/yourusername/netflix-ai-movie-recommender?style=for-the-badge&color=6C63FF)](https://github.com/yourusername/netflix-ai-movie-recommender/fork)
+[![🍴 Fork](https://img.shields.io/github/forks/wahidali-glitch/netflix-ai-movie-recommender?style=for-the-badge&color=6C63FF)](https://github.com/wahidali-glitch/netflix-ai-movie-recommender/fork)
 
 <br/>
 
@@ -229,7 +229,7 @@ netflix-ai-movie-recommender/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/netflix-ai-movie-recommender.git
+git clone https://github.com/wahidali-glitch/netflix-ai-movie-recommender.git
 cd netflix-ai-movie-recommender
 ```
 
@@ -327,14 +327,15 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <div align="center">
 
-**Built with ❤️ and lots of ☕**
+**Built with ❤️ and lots of ☕ by Wahid Ali**
 
 *If this project helped you or impressed you, please consider giving it a ⭐ — it means the world!*
 
 <br/>
 
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/yourusername)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/yourusername)
+[![GitHub](https://img.shields.io/badge/GitHub-wahidali--glitch-181717?style=for-the-badge&logo=github)](https://github.com/wahidali-glitch)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Wahid%20Ali-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/wahid-ali-93b436301/)
+[![Gmail](https://img.shields.io/badge/Gmail-wahid.imcb%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:wahid.imcb@gmail.com)
 
 <br/>
 
