@@ -10,13 +10,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 # ---------------------------------------------------
 
 st.set_page_config(
-    page_title="Netflix AI Recommender",
+    page_title="Netflix AI Movie Recommender",
     page_icon="🎬",
     layout="wide"
 )
 
 # ---------------------------------------------------
-# API KEY
+# TMDB API
 # ---------------------------------------------------
 
 API_KEY = "84b0e65085a07a0f29ca92861a347dba"
@@ -29,71 +29,144 @@ st.markdown("""
 <style>
 
 html, body, [class*="css"] {
-    background-color: #0e1117;
+    background-color: #0b0b0b;
     color: white;
     font-family: 'Segoe UI', sans-serif;
 }
 
 .main {
-    background-color: #0e1117;
+    background-color: #0b0b0b;
 }
 
-h1 {
+/* HERO SECTION */
+
+.hero {
     text-align: center;
-    color: #E50914;
-    font-size: 65px;
-    margin-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 30px;
 }
+
+.hero-title {
+    font-size: 70px;
+    font-weight: 900;
+    color: #E50914;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 22px;
+    color: #bbbbbb;
+    margin-bottom: 20px;
+}
+
+/* SELECT BOX */
+
+div[data-baseweb="select"] {
+    background-color: #1c1c1c !important;
+    border-radius: 12px !important;
+    color: white !important;
+}
+
+/* BUTTON */
+
+.stButton>button {
+    background: linear-gradient(90deg, #E50914, #ff1f1f);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    height: 60px;
+    width: 280px;
+    font-size: 22px;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0px 4px 20px rgba(229,9,20,0.5);
+}
+
+.stButton>button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #ff1f1f, #E50914);
+}
+
+/* MOVIE CARD */
 
 .movie-card {
     background-color: #141414;
-    border-radius: 15px;
-    padding: 10px;
-    transition: transform 0.3s ease;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
-    height: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    padding-bottom: 15px;
+    transition: 0.4s;
+    box-shadow: 0px 6px 20px rgba(0,0,0,0.6);
+    margin-bottom: 25px;
 }
 
 .movie-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0px 10px 30px rgba(229,9,20,0.4);
 }
 
 .movie-title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
-    margin-top: 10px;
+    padding: 10px;
     color: white;
 }
 
 .movie-rating {
     color: gold;
-    font-size: 16px;
+    font-size: 18px;
+    padding-left: 10px;
 }
 
 .movie-date {
     color: #bbbbbb;
-    font-size: 14px;
+    font-size: 15px;
+    padding-left: 10px;
 }
 
 .movie-overview {
-    font-size: 13px;
     color: #dddddd;
+    font-size: 14px;
+    padding: 10px;
+    height: 120px;
+    overflow: hidden;
 }
 
-.stButton>button {
-    background-color: #E50914;
-    color: white;
+/* IMAGE */
+
+img {
+    border-radius: 15px 15px 0px 0px;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #E50914;
     border-radius: 10px;
-    height: 55px;
-    width: 260px;
-    font-size: 20px;
-    border: none;
-    transition: 0.3s;
 }
 
-.stButton>button:hover {
-    background-color: #b20710;
-    transform: scale(1.05);
+/* MOBILE */
+
+@media screen and (max-width: 768px) {
+
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    .stButton>button {
+        width: 100%;
+    }
 }
 
 </style>
@@ -108,15 +181,17 @@ credits = pd.read_csv("dataset/tmdb_5000_credits.csv")
 
 movies = movies.merge(credits, on='title')
 
-movies = movies[[
-    'movie_id',
-    'title',
-    'overview',
-    'genres',
-    'keywords',
-    'cast',
-    'crew'
-]]
+movies = movies[
+    [
+        'movie_id',
+        'title',
+        'overview',
+        'genres',
+        'keywords',
+        'cast',
+        'crew'
+    ]
+]
 
 movies.dropna(inplace=True)
 
@@ -220,9 +295,9 @@ def fetch_movie_details(movie_id):
 
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}"
 
-    data = requests.get(url)
+    response = requests.get(url)
 
-    data = data.json()
+    data = response.json()
 
     poster_path = data.get('poster_path')
 
@@ -289,15 +364,20 @@ def recommend(movie):
     )
 
 # ---------------------------------------------------
-# HEADER
+# HERO SECTION
 # ---------------------------------------------------
 
-st.markdown(
-    "<h1>🎬 Netflix AI Movie Recommender</h1>",
-    unsafe_allow_html=True
-)
+st.markdown("""
+<div class="hero">
+    <div class="hero-title">
+        🎬 Netflix AI Recommender
+    </div>
 
-st.write("")
+    <div class="hero-subtitle">
+        Discover movies powered by Machine Learning
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # ---------------------------------------------------
 # MOVIE SELECT
@@ -306,7 +386,7 @@ st.write("")
 movie_list = new_df['title'].values
 
 selected_movie = st.selectbox(
-    "🎥 Select a movie",
+    "🎥 Choose your favorite movie",
     movie_list
 )
 
@@ -318,13 +398,18 @@ st.write("")
 
 if st.button("🔥 Recommend Movies"):
 
-    (
-        names,
-        posters,
-        ratings,
-        dates,
-        overviews
-    ) = recommend(selected_movie)
+    with st.spinner("Finding amazing movies for you..."):
+
+        (
+            names,
+            posters,
+            ratings,
+            dates,
+            overviews
+        ) = recommend(selected_movie)
+
+    st.write("")
+    st.subheader("🍿 Recommended For You")
 
     cols = st.columns(5)
 
@@ -333,7 +418,7 @@ if st.button("🔥 Recommend Movies"):
         with cols[i]:
 
             st.markdown(
-                f"""
+                """
                 <div class="movie-card">
                 """,
                 unsafe_allow_html=True
@@ -344,22 +429,25 @@ if st.button("🔥 Recommend Movies"):
             st.markdown(
                 f"""
                 <div class="movie-title">
-                🎬 {names[i]}
+                    {names[i]}
                 </div>
 
                 <div class="movie-rating">
-                ⭐ Rating: {ratings[i]}
+                    ⭐ {ratings[i]}
                 </div>
 
                 <div class="movie-date">
-                📅 Release: {dates[i]}
+                    📅 {dates[i]}
                 </div>
 
                 <div class="movie-overview">
-                📝 {overviews[i][:120]}...
+                    {overviews[i][:140]}...
                 </div>
                 """,
                 unsafe_allow_html=True
             )
 
-            st.markdown("</div>", unsafe_allow_html=True)
+            st.markdown(
+                "</div>",
+                unsafe_allow_html=True
+            )
