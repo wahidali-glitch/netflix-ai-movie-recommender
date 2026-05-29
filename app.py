@@ -22,7 +22,7 @@ st.set_page_config(
 import os
 from dotenv import load_dotenv
 load_dotenv()
-API_KEY = os.environ.get("TMDB_API_KEY")
+API_KEY = st.secrets.get("TMDB_API_KEY") or os.environ.get("TMDB_API_KEY")
 
 # ---------------------------------------------------
 # CUSTOM CSS
