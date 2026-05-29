@@ -19,7 +19,10 @@ st.set_page_config(
 # TMDB API
 # ---------------------------------------------------
 
-API_KEY = "84b0e65085a07a0f29ca92861a347dba"
+import os
+from dotenv import load_dotenv
+load_dotenv()
+API_KEY = os.environ.get("TMDB_API_KEY")
 
 # ---------------------------------------------------
 # CUSTOM CSS
